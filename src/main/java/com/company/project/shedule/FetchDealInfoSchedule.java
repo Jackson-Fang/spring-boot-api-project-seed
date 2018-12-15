@@ -12,7 +12,13 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: chenyin
@@ -25,6 +31,10 @@ public class FetchDealInfoSchedule {
      * 超过200W 提醒
      */
     private static final Double ALARM_DEAL_MONEY = 1000000D;
+
+    private static final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+    private static Set<Double> alarmdMoneyList = new HashSet<>();
 
     @Scheduled(cron = "0 0/1 * * * ?")
     public void fetchInfo() {
@@ -80,14 +90,27 @@ public class FetchDealInfoSchedule {
                 if (needAlarm) {
                     alarmList.add(dealDto);
                 }
-                System.out.println(JSON.toJSONString(dealDto));
+                System.out.println("成功抓取信息");
             }
             if (!alarmList.isEmpty()) {
                 for (DealDto dealDto : alarmList) {
+                    Double dealMoney = dealDto.getDealMoney();
+                    if (alarmdMoneyList.contains(dealMoney)) {
+                        continue;
+                    }
+                    alarmdMoneyList.add(dealMoney);
+                    executorService.schedule((Runnable) () -> {
+                        try {
+                            alarmdMoneyList.remove(dealMoney);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }, 1, TimeUnit.DAYS);
+
                     StringBuilder message = new StringBuilder();
                     message.append("有机会来啦!\n");
                     message.append("成交量:");
-                    message.append(dealDto.getDealMoney());
+                    message.append(dealMoney);
                     message.append(",");
                     message.append("成交时间:");
                     message.append(dealDto.getDealTime());
