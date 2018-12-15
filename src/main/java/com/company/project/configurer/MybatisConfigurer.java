@@ -25,7 +25,7 @@ import static com.company.project.core.ProjectConstant.*;
 @Configuration
 public class MybatisConfigurer {
 
-    @Bean
+    /*@Bean
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
@@ -44,7 +44,7 @@ public class MybatisConfigurer {
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
+        factory.setMapperLocations(resolver.getResources("classpath:mapper*//*.xml"));
         return factory.getObject();
     }
 
@@ -62,7 +62,7 @@ public class MybatisConfigurer {
         mapperScannerConfigurer.setProperties(properties);
 
         return mapperScannerConfigurer;
-    }
+    }*/
 
 }
 
