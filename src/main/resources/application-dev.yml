@@ -11,7 +11,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   #redis配置
   redis:
-    host:
+    host: 111.231.110.149
     password: cy19930410
     port: 6379
     database: 0
