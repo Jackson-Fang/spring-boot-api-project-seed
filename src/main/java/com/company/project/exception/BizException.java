@@ -4,22 +4,22 @@ package com.company.project.exception;
  * @author: chenyin
  * @date: 2019-03-07 18:31
  */
-public class BizExcetion extends RuntimeException{
+public class BizException extends RuntimeException{
     /**
      * 错误编码
      */
     private int errorCode;
 
-    public BizExcetion(String message) {
+    public BizException(String message) {
         super(message);
     }
 
-    public BizExcetion(ErrorCode errorCode) {
+    public BizException(ErrorCode errorCode) {
         super(errorCode.getErrorMsg());
         this.setErrorCode(errorCode.getErrorCode());
     }
 
-    public BizExcetion(int errorCode, String message) {
+    public BizException(int errorCode, String message) {
         super(message);
         this.setErrorCode(errorCode);
     }

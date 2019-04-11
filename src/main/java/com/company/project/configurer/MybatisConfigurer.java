@@ -1,5 +1,7 @@
 package com.company.project.configurer;
 
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.company.project.core.ProjectConstant;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -26,14 +28,13 @@ public class MybatisConfigurer implements TransactionManagementConfigurer {
 
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean factory = new MybatisSqlSessionFactoryBean();
         factory.setDataSource(dataSource);
         factory.setTypeAliasesPackage(ProjectConstant.ENTITY_PACKAGE);
-
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         factory.setMapperLocations(resolver.getResources("classpath*:mybatis/mapper/*.xml"));
-        factory.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis.xml"));
+        factory.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis-config.xml"));
         return factory.getObject();
     }
 
