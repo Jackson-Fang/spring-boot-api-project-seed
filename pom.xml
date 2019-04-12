@@ -18,6 +18,7 @@
         <fastjson.version>1.2.44</fastjson.version>
         <freemarker.version>2.3.28</freemarker.version>
         <lombok.version>1.16.8</lombok.version>
+        <hutool.version>4.5.5</hutool.version>
     </properties>
 
     <!-- Inherit defaults from Spring Boot -->
@@ -28,6 +29,11 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
         <!--Spring Boot依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
