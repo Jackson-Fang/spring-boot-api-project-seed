@@ -1,4 +1,4 @@
-package com.company.project.biz.util;
+package com.company.project.util;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.company.project.biz.util;
+package com.company.project.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

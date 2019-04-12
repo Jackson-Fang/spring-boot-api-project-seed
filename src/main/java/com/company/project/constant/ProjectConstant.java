@@ -1,4 +1,4 @@
-package com.company.project.core;
+package com.company.project.constant;
 
 /**
  * 项目常量

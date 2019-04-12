@@ -1,8 +1,8 @@
-package com.company.project.biz.util;
+package com.company.project.util;
 
 import com.alibaba.fastjson.JSON;
 import com.company.project.bean.LoginUser;
-import com.company.project.core.ProjectConstant;
+import com.company.project.constant.ProjectConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

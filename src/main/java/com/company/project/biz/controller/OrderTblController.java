@@ -2,11 +2,10 @@ package com.company.project.biz.controller;
 
 
 import com.company.project.bean.BaseResult;
-import com.company.project.biz.entity.OrderTbl;
 import com.company.project.biz.mapper.OrderTblMapper;
 import com.company.project.biz.service.OrderTblService;
-import com.company.project.biz.util.JedisLockUtil;
-import com.company.project.biz.util.JedisUtil;
+import com.company.project.util.JedisLockUtil;
+import com.company.project.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
