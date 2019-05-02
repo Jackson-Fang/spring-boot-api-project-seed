@@ -29,6 +29,11 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.5.0</version>
+        </dependency>
         <!--常用工具类-->
         <dependency>
             <groupId>cn.hutool</groupId>
