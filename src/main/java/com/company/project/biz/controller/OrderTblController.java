@@ -1,6 +1,9 @@
 package com.company.project.biz.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.company.project.bean.BaseResult;
 import com.company.project.biz.entity.OrderTbl;
 import com.company.project.biz.mapper.OrderTblMapper;
@@ -36,11 +39,9 @@ public class OrderTblController {
 
     @GetMapping("test")
     public BaseResult test() {
-        log.info("info测试");
-        log.error("error测试");
+        IPage<OrderTbl> page = orderTblMapper.selectPage(new Page<>(1, 1), new QueryWrapper<>());
 
-
-        return new BaseResult();
+        return new BaseResult(page);
     }
 
 }
