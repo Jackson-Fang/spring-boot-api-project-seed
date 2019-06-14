@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.company.project.bean.LoginUser;
 import com.company.project.core.ProjectConstant;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  */
 @Service("userUtilService")
 public class UserUtilService {
-    private Logger logger = Logger.getLogger(this.getClass());
+//    private Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     private JedisUtil jedisUtil;

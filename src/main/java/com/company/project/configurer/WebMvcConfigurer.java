@@ -3,11 +3,14 @@ package com.company.project.configurer;
 import java.nio.charset.Charset;
 import java.util.List;
 
-
+import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
+import com.company.project.filter.SentinelFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -44,6 +47,29 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         //添加自己的拦截器
 //        registry.addInterceptor()
+    }
+
+    /**
+     * web请求自动添加限流策略
+     *
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean filterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new SentinelFilter());
+        registration.addUrlPatterns("*.json", "*.hml", "*.html");
+        registration.setOrder(1);
+        return registration;
+    }
+    /**
+     * sentinel限流服务引入
+     *
+     * @return
+     */
+    @Bean
+    public SentinelResourceAspect sentinelResourceAspect() {
+        return new SentinelResourceAspect();
     }
 
 }

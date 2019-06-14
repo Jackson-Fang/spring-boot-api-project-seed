@@ -9,7 +9,6 @@ import com.company.project.bean.UserContext;
 import com.company.project.biz.util.UserUtilService;
 import com.company.project.exception.BizException;
 import com.company.project.exception.ErrorCode;
-import org.apache.log4j.Logger;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -22,7 +21,7 @@ import java.io.PrintWriter;
  * 登录拦截器
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-    private Logger logger = Logger.getLogger(this.getClass());
+//    private Logger logger = Logger.getLogger(this.getClass());
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -72,7 +71,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             }
         } else {
             ex.printStackTrace();
-            logger.error("system error", ex);
+//            logger.error("system error", ex);
             this.writeResult(response, new BaseResult(BaseResult.FAILED, "系统异常，请联系在线客服"));
         }
     }
@@ -85,7 +84,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             writer.write(JSON.toJSONString(baseResult));
             writer.flush();
         } catch (Exception e) {
-            logger.info("BaseInterceptor exception", e);
+//            logger.info("BaseInterceptor exception", e);
         } finally {
             if (null != writer) {
                 writer.close();
