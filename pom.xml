@@ -29,9 +29,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>spring-boot-starter-ahas-sentinel-client</artifactId>
-            <version>1.1.2</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <version>0.1.2.RELEASE</version>
         </dependency>
         <!--Spring Boot依赖-->
         <dependency>
