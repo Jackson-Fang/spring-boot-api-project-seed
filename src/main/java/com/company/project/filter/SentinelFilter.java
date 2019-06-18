@@ -21,27 +21,10 @@ import java.io.PrintWriter;
  */
 @Component
 @Slf4j
-public class SentinelFilter extends CommonFilter implements InitializingBean {
+public class SentinelFilter extends CommonFilter {
+
     @Override
-    public void afterPropertiesSet() throws Exception {
-
-
-        // 全局设置一次即可，比如在某个全局的 init()方法里加入。
-        WebCallbackManager.setUrlBlockHandler(new UrlBlockHandler() {
-            @Override
-            public void blocked(HttpServletRequest request, HttpServletResponse response, BlockException ex)
-                    throws IOException {
-                // request 里包含了此次请求所有的信息，可以从其中解析出URL、请求参数等。
-                log.info("blocked: " + request.getPathInfo());
-                // response 表示响应对象，直接向其中写 fallback 结果即可。
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().println("flow control");
-            }
-        });
-
-    }
-//    @Override
-//    public void init(FilterConfig filterConfig) {
+    public void init(FilterConfig filterConfig) {
 //        WebCallbackManager.setUrlBlockHandler(new UrlBlockHandler() {
 //            @Override
 //            public void blocked(HttpServletRequest httpServletRequest, HttpServletResponse response, BlockException e) throws IOException {
@@ -60,5 +43,5 @@ public class SentinelFilter extends CommonFilter implements InitializingBean {
 //            }
 //        });
 //        super.init(filterConfig);
-//    }
+    }
 }

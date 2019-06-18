@@ -33,7 +33,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/test")
 @Slf4j
-public class TestController implements InitializingBean {
+public class TestController  {
     @Resource
     private OrderTblService orderTblService;
     @Resource
@@ -67,11 +67,4 @@ public class TestController implements InitializingBean {
         return new BaseResult();
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        ClusterClientAssignConfig clientConfig = new ClusterClientAssignConfig();
-        clientConfig.setServerHost("192.168.202.91");
-        clientConfig.setServerPort(11111);
-        ClusterClientConfigManager.applyNewAssignConfig(clientConfig);
-    }
 }
