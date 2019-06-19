@@ -22,6 +22,7 @@ import com.company.project.biz.service.OrderTblService;
 import com.company.project.biz.util.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,6 +48,8 @@ public class TestController implements InitializingBean {
     private OrderTblMapper orderTblMapper;
     @Resource
     private JedisUtil jedisUtil;
+    @Value("${test.id}")
+    private String testId;
 
     @GetMapping("test")
     public BaseResult test() {
@@ -74,6 +77,11 @@ public class TestController implements InitializingBean {
         return new BaseResult();
     }
 
+    @GetMapping("testId")
+    public BaseResult testId() {
+        return new BaseResult(testId);
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
 //        ClusterClientAssignConfig clientConfig = new ClusterClientAssignConfig();
@@ -81,14 +89,18 @@ public class TestController implements InitializingBean {
 //        clientConfig.setServerPort(11111);
 //        ClusterClientConfigManager.applyNewAssignConfig(clientConfig);
 
-        String namespaceName = "application";
-        String flowRuleKey = "flowRules";
-        // It's better to provide a meaningful default value.
-        String defaultFlowRules = "[]";
-
-        ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new ApolloDataSource<>(namespaceName,
-                flowRuleKey, defaultFlowRules, source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
-        }));
-        FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
+//        String namespaceName = "application";
+//        String flowRuleKey = "flowRules";
+//        String apolloMetaServerAddress = "http://apollo-rd.test.ywwl.com";
+//        System.setProperty("app.id", "sentinel");
+//        System.setProperty("apollo.meta", apolloMetaServerAddress);
+//        System.setProperty("env", "rd");
+//        // It's better to provide a meaningful default value.
+//        String defaultFlowRules = "[]";
+//
+//        ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new ApolloDataSource<>(namespaceName,
+//                flowRuleKey, defaultFlowRules, source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
+//        }));
+//        FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
     }
 }

@@ -21,3 +21,5 @@ app:
 apollo:
   bootstrap:
     enabled: true
+    namespaces: application
+  meta: http://apollo-rd.test.ywwl.com
