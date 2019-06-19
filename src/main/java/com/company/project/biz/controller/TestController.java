@@ -4,7 +4,13 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.cluster.client.config.ClusterClientAssignConfig;
 import com.alibaba.csp.sentinel.cluster.client.config.ClusterClientConfig;
 import com.alibaba.csp.sentinel.cluster.client.config.ClusterClientConfigManager;
+import com.alibaba.csp.sentinel.datasource.ReadableDataSource;
+import com.alibaba.csp.sentinel.datasource.apollo.ApolloDataSource;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import com.alibaba.csp.sentinel.transport.config.TransportConfig;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -21,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -69,9 +76,19 @@ public class TestController implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        ClusterClientAssignConfig clientConfig = new ClusterClientAssignConfig();
-        clientConfig.setServerHost("192.168.202.91");
-        clientConfig.setServerPort(11111);
-        ClusterClientConfigManager.applyNewAssignConfig(clientConfig);
+//        ClusterClientAssignConfig clientConfig = new ClusterClientAssignConfig();
+//        clientConfig.setServerHost("192.168.202.91");
+//        clientConfig.setServerPort(11111);
+//        ClusterClientConfigManager.applyNewAssignConfig(clientConfig);
+
+        String namespaceName = "application";
+        String flowRuleKey = "flowRules";
+        // It's better to provide a meaningful default value.
+        String defaultFlowRules = "[]";
+
+        ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new ApolloDataSource<>(namespaceName,
+                flowRuleKey, defaultFlowRules, source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
+        }));
+        FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
     }
 }

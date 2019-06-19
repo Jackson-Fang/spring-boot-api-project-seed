@@ -3,7 +3,7 @@ project:
   name: sentinel-test
 spring:
   profiles:
-    active: dev
+    active: rd
   cloud:
     sentinel:
       transport:
@@ -16,3 +16,8 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+app:
+  id: sentinel
+apollo:
+  bootstrap:
+    enabled: true
