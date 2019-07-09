@@ -89,18 +89,14 @@ public class TestController implements InitializingBean {
 //        clientConfig.setServerPort(11111);
 //        ClusterClientConfigManager.applyNewAssignConfig(clientConfig);
 
-//        String namespaceName = "application";
-//        String flowRuleKey = "flowRules";
-//        String apolloMetaServerAddress = "http://apollo-rd.test.ywwl.com";
-//        System.setProperty("app.id", "sentinel");
-//        System.setProperty("apollo.meta", apolloMetaServerAddress);
-//        System.setProperty("env", "rd");
-//        // It's better to provide a meaningful default value.
-//        String defaultFlowRules = "[]";
-//
-//        ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new ApolloDataSource<>(namespaceName,
-//                flowRuleKey, defaultFlowRules, source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
-//        }));
-//        FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
+        String namespaceName = "application";
+        String flowRuleKey = "flowRules";
+        // It's better to provide a meaningful default value.
+        String defaultFlowRules = "[]";
+
+        ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new ApolloDataSource<>(namespaceName,
+                flowRuleKey, defaultFlowRules, source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
+        }));
+        FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
     }
 }
