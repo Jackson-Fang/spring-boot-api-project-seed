@@ -19,9 +19,14 @@ public class FlowControlService {
     public int mockApiLimit(int i)  {
         return i;
     }
+
     @SentinelResource(value ="paramFlowRules",blockHandler = "handleParamFlowException", blockHandlerClass = {ExceptionUtil.class})
     public BaseResult mockParamFlowControl(String userName) {
         System.out.println("当前请求热点用户名:" + userName);
+        return new BaseResult();
+    }
+    @SentinelResource(value ="authoritylowRules",blockHandler = "handleAuthorityFlowException", blockHandlerClass = {ExceptionUtil.class})
+    public BaseResult mockAuthorityFlowControl() {
         return new BaseResult();
     }
 

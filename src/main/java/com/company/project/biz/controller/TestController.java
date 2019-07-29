@@ -2,6 +2,7 @@ package com.company.project.biz.controller;
 
 import com.company.project.bean.BaseResult;
 import com.company.project.biz.service.FlowControlService;
+import com.ywwl.trial.goods.client.TbUnionAdzoneClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,16 +25,16 @@ public class TestController {
 
     @Resource
     private FlowControlService flowControlService;
+    @Resource
+    private TbUnionAdzoneClientService tbUnionAdzoneClientService;
+
     /* ------------- 普通流控 -------------- */
-
-
     /**
      * 普通web项目 http接口限流，资源名为requestMapping全路径 /test/flowControl
      * 用于限制web接口qps
      * @return
      */
     @GetMapping("flowControl")
-
     public BaseResult flowControl() {
         System.out.println("flowControl");
         return new BaseResult();
@@ -70,8 +71,9 @@ public class TestController {
     /* ------------- 热点参数流控 -------------- */
 
     /**
-     * 根据请求参数进行限流，,根据参数(如ip，userName，app)限流，用于防止某用户恶意请求
-     * 例子中当userName为 ywwl 时进行限流
+     * 根据请求参数进行限流，,根据参数(如ip，userName，app)限流，不同参数qps互不干扰
+     * 也可以针对特殊参数值做配置，(用于防止某用户恶意请求等)
+     * 例子中针对userName进行限流(公共限流配置)，对userName为 ywwl 时进行特殊限流
      * @param userName
      * @return
      */
@@ -80,9 +82,19 @@ public class TestController {
         return flowControlService.mockParamFlowControl(userName);
     }
 
-    @GetMapping("whiteList")
-    public BaseResult whiteList(String userName) {
-        return flowControlService.mockParamFlowControl(userName);
+    /**
+     * 黑名单配置
+     * @return
+     */
+    @GetMapping("blackList")
+    public BaseResult blackList() {
+        return flowControlService.mockAuthorityFlowControl();
+    }
+
+    @GetMapping("dubboConsumer")
+    public BaseResult dubboConsumer() {
+        String result = tbUnionAdzoneClientService.getTbkAppKey();
+        return new BaseResult(result);
     }
 
 }

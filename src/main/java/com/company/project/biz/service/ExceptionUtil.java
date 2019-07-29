@@ -16,4 +16,8 @@ public final class ExceptionUtil {
         System.out.println("热点限流触发: " + ex.getClass().getCanonicalName() + "，限流用户" + userName);
         return new BaseResult(BaseResult.FAILED,"请求过于频繁");
     }
+    public static BaseResult handleAuthorityFlowException(BlockException ex) {
+        System.out.println("授权限流触发: " + ex.getClass().getCanonicalName());
+        return new BaseResult(BaseResult.FAILED,"请求过于频繁");
+    }
 }
