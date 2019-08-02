@@ -1,7 +1,9 @@
 package com.company.project.biz.controller;
 
+import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.company.project.bean.BaseResult;
 import com.company.project.biz.service.FlowControlService;
+import com.company.project.biz.util.IpUtil;
 import com.ywwl.trial.goods.client.TbUnionAdzoneClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -58,14 +61,21 @@ public class TestController {
 
     /**
      * 根据来源(如ip，userName，app)限流，用于防止某用户恶意请求
-     * 需要实现 RequestOriginParser 从 HttpServletRequest中获取请求来源信息
+     * http请求可实现 RequestOriginParser 从 HttpServletRequest中全局获取请求来源信息
+     * 普通SentinelResource定义的资源可通过ContextUtil.enter(contextName, origin); 塞入自定义origin信息来设置来源
      * 控制台中修改限流来源为指定origin
      * 详情参考 com.company.project.configurer.SentinelConfig#requestOriginParser()
      * @return
      */
-    @GetMapping("flowControl2")
-    public BaseResult flowControl2() {
-        return new BaseResult();
+    @GetMapping("ipLimitTest")
+    public BaseResult ipLimitTest(HttpServletRequest httpServletRequest) {
+        try {
+            String ip = IpUtil.getClientIP(httpServletRequest);
+            ContextUtil.enter("aa", ip);
+            return flowControlService.ipLimitTest(httpServletRequest);
+        }finally {
+            ContextUtil.exit();
+        }
     }
 
     /* ------------- 热点参数流控 -------------- */

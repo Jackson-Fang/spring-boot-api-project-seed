@@ -2,6 +2,9 @@ package com.company.project.biz.service;
 
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.company.project.bean.BaseResult;
+import com.company.project.biz.util.IpUtil;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: chenyin
@@ -18,6 +21,11 @@ public final class ExceptionUtil {
     }
     public static BaseResult handleAuthorityFlowException(BlockException ex) {
         System.out.println("授权限流触发: " + ex.getClass().getCanonicalName());
+        return new BaseResult(BaseResult.FAILED,"请求过于频繁");
+    }
+
+    public static BaseResult handleIpFlowException(HttpServletRequest httpServletRequest,BlockException ex) {
+        System.out.println("ip限流触发,ip+" + IpUtil.getClientIP(httpServletRequest));
         return new BaseResult(BaseResult.FAILED,"请求过于频繁");
     }
 }
