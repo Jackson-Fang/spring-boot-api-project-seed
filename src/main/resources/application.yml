@@ -17,8 +17,3 @@ apollo:
   bootstrap:
     enabled: true
     namespaces: application
-ywwl:
-  sentinel:
-    enabled: true
-    transport:
-      port: 8719

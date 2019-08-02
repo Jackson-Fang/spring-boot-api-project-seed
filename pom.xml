@@ -41,8 +41,8 @@
         <!--</dependency>-->
         <dependency>
             <groupId>com.ywwl</groupId>
-            <artifactId>ywwl-sentinel-client</artifactId>
-            <version>1.0.0</version>
+            <artifactId>ywwl-sentinel-starter</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <!--小Y商品服务-->
         <dependency>
