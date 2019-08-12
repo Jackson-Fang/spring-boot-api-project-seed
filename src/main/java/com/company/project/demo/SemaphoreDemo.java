@@ -1,5 +1,7 @@
 package com.company.project.demo;
 
+import lombok.val;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
@@ -28,6 +30,10 @@ public class SemaphoreDemo {
         for (Thread thread : threadList) {
             thread.start();
         }
+
+
+
+
     }
     private static void doWork() {
         try {
