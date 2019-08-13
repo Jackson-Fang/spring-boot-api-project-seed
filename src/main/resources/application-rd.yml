@@ -4,9 +4,9 @@ spring:
     active: rd
   #数据源配置
   datasource:
-    url: jdbc:mysql://localhost:3306/fescar?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true&amp;useSSL=true
+    url: jdbc:mysql://172.16.5.163/trial?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false&amp;allowMultiQueries=true
     username: root
-    password: 123456
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
   #redis配置

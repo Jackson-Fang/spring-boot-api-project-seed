@@ -17,3 +17,7 @@ apollo:
   bootstrap:
     enabled: true
     namespaces: application
+ywwl:
+  sentinel:
+    transport:
+      dashboard: 192.168.201.64:8080

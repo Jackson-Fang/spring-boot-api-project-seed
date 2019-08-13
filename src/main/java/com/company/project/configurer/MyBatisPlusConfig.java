@@ -55,7 +55,7 @@ public class MyBatisPlusConfig {
      * 配置文件和mybatis-boot的配置文件同步
      * @return
      */
-    @Bean
+//    @Bean
     public MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean() {
         MybatisSqlSessionFactoryBean mybatisPlus = new MybatisSqlSessionFactoryBean();
         mybatisPlus.setDataSource(dataSource);

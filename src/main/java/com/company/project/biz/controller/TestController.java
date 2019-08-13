@@ -107,4 +107,19 @@ public class TestController {
         return new BaseResult(result);
     }
 
+    /**
+     * 集群限流测试
+     * @return
+     */
+    @GetMapping("cluster")
+    public BaseResult cluster() {
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("集群限流请求成功");
+        return new BaseResult();
+    }
+
 }
