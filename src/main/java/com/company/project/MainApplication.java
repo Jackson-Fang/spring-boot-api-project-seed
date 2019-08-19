@@ -6,7 +6,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource({"classpath:spring/*.xml", "classpath*:/dubbo/*.xml"})
+@ImportResource({"classpath:spring/*.xml"})
 //@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 public class MainApplication {
     public static void main(String[] args) {

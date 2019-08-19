@@ -4,12 +4,12 @@ import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.company.project.bean.BaseResult;
 import com.company.project.biz.service.FlowControlService;
 import com.company.project.biz.util.IpUtil;
-import com.ywwl.trial.goods.client.TbUnionAdzoneClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,8 +28,6 @@ public class TestController {
 
     @Resource
     private FlowControlService flowControlService;
-    @Resource
-    private TbUnionAdzoneClientService tbUnionAdzoneClientService;
 
     /* ------------- 普通流控 -------------- */
     /**
@@ -101,11 +99,6 @@ public class TestController {
         return flowControlService.mockAuthorityFlowControl();
     }
 
-    @GetMapping("dubboConsumer")
-    public BaseResult dubboConsumer() {
-        String result = tbUnionAdzoneClientService.getTbkAppKey();
-        return new BaseResult(result);
-    }
 
     /**
      * 集群限流测试
@@ -113,13 +106,15 @@ public class TestController {
      */
     @GetMapping("cluster")
     public BaseResult cluster() {
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         System.out.println("集群限流请求成功");
         return new BaseResult();
     }
+
+//    @PostConstruct
+//    public void init() {
+//        ClusterClientConfigManager.applyNewConfig(new ClusterClientConfig().setRequestTimeout(50));
+//    }
+
+//    java -Dserver.port=8081 -Dcsp.sentinel.dashboard.server=localhost:8080  -Dproject.name=sentinel-develop -jar target/sentinel-dashboard.jar
 
 }

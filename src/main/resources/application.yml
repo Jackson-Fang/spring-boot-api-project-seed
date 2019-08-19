@@ -1,9 +1,13 @@
 #存放公用配置
 project:
-  name: sentinel
+  name: sentinel-develop
 spring:
   profiles:
     active: rd
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 192.168.201.64:8080
 mybatis-plus:
   config-location: classpath:/mybatis/mybatis-config.xml
   mapper-locations: classpath:/mybatis/mapper/*.xml
@@ -17,7 +21,3 @@ apollo:
   bootstrap:
     enabled: true
     namespaces: application
-ywwl:
-  sentinel:
-    transport:
-      dashboard: 192.168.201.64:8080
