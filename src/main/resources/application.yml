@@ -1,6 +1,4 @@
 #存放公用配置
-project:
-  name: sentinel
 spring:
   profiles:
     active: rd
@@ -12,11 +10,10 @@ mybatis-plus:
     db-config:
       id-type: auto
 app:
-  id: sentinel
+  id: sentinel-test
 apollo:
   bootstrap:
     enabled: true
-    namespaces: application
 ywwl:
   sentinel:
     transport:

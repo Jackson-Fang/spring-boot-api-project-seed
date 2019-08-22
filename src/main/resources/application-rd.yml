@@ -25,9 +25,3 @@ spring:
 logging:
   level:
     com.company.project.biz.mapper: debug
-app:
-  id: sentinel
-apollo:
-  bootstrap:
-    enabled: true
-    namespaces: application
