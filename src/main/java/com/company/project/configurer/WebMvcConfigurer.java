@@ -42,7 +42,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
+        System.out.println("1");
     }
 
 }
