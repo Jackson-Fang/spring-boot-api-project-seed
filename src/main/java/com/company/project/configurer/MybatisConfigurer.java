@@ -38,6 +38,7 @@ public class MybatisConfigurer implements TransactionManagementConfigurer {
 
     @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
+        System.out.println("9");
         return new DataSourceTransactionManager(dataSource);
     }
 
