@@ -40,6 +40,8 @@ public class TestController{
                 = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutorService.scheduleAtFixedRate(
                 () -> System.out.println("执行任务"), 3000, 1000, TimeUnit.MILLISECONDS);
+
+        System.out.println(222);
     }
 
 }
