@@ -44,6 +44,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         System.out.println("1");
         System.out.println("2");
+        System.out.println("3");
     }
 
 }
