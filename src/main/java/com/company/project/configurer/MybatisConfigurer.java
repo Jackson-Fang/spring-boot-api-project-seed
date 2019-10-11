@@ -40,6 +40,7 @@ public class MybatisConfigurer implements TransactionManagementConfigurer {
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         System.out.println("7");
         System.out.println("8");
+        System.out.println("9");
         return new DataSourceTransactionManager(dataSource);
     }
 
