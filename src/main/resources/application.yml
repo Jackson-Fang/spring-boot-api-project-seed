@@ -1,7 +1,7 @@
 #存放公用配置
 spring:
   profiles:
-    active: rd
+    active: @env@
 mybatis-plus:
   config-location: classpath:/mybatis/mybatis-config.xml
   mapper-locations: classpath:/mybatis/mapper/*.xml
@@ -14,7 +14,7 @@ app:
 apollo:
   bootstrap:
     enabled: true
-ywwl:
-  sentinel:
-    transport:
-      dashboard: 192.168.201.64:8080
+#ywwl:
+#  sentinel:
+#    transport:
+#      dashboard: 192.168.202.83:8080
