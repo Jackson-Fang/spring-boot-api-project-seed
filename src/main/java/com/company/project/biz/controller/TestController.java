@@ -128,8 +128,23 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-        System.out.println(111);
+        int x = 121;
+        int flag = 1;
+        if (x < 0) {
+            flag = -1;
+        }
+        int n = x * flag;
+        int result = 0;
+        while (n > 0) {
+            result = result * 10 + n % 10;
+            n = n / 10;
+        }
+        result = result * flag;
+        System.out.println(result);
     }
+
+
+
 
 
 }
