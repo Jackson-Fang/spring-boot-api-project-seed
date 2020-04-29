@@ -1,62 +1,63 @@
 package com.company.project.demo;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author: chenyin
  * @date: 2019-10-17 20:44
  */
 public class Producer {
-    private static final Object lock = new Object();
-    private static int i = 0;
 
-    static class EvenPrinter implements Runnable{
+    static final Object lock = new Object();
+    static int num = 1;
+    static int max = 100;
+
+    static class EvenThead implements Runnable {
         @Override
         public void run() {
-            synchronized (lock) {
-                while (i <= 100) {
-                    try {
-                        if (i % 2 == 1) {
+            while (num <= max) {
+                synchronized (lock) {
+                    if (num % 2 == 0) {
+                        System.out.println(num);
+                        num++;
+                        lock.notifyAll();
+                    } else {
+                        try {
                             lock.wait();
-                        } else {
-                            System.out.println(Thread.currentThread().getName() + ":" + i);
-                            lock.notifyAll();
-                            i++;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-
                 }
             }
         }
     }
-    static class OddPrinter implements Runnable{
+    static class OddThead implements Runnable {
         @Override
         public void run() {
-            synchronized (lock) {
-                while (i <= 100) {
-                    try {
-                        if (i % 2 == 0) {
+            while (num <= max) {
+                synchronized (lock) {
+                    if (num % 2 == 1) {
+                        System.out.println(num);
+                        num++;
+                        lock.notifyAll();
+                    } else {
+                        try {
                             lock.wait();
-                        } else {
-                            System.out.println(Thread.currentThread().getName() + ":" + i);
-                            lock.notifyAll();
-                            i++;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-
                 }
             }
         }
     }
 
     public static void main(String[] args) {
-        new Thread(new EvenPrinter()).start();
-        new Thread(new OddPrinter()).start();
+        new Thread(new EvenThead()).start();
+
+        new Thread(new OddThead()).start();
+
     }
-
-
-
 
 }
