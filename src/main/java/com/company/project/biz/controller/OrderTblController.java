@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * <p>
@@ -44,4 +49,10 @@ public class OrderTblController {
         return new BaseResult(page);
     }
 
+    public static void main(String[] args) {
+        String[] str = new String[] { "yang", "hao" };
+        List<String> list = Arrays.asList(str);
+        str[0] = "chenyin";
+        System.out.println(list);
+    }
 }
